@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container animate-fade">
+    <div class="text-center my-5 py-3">
+        <h1 class="display-4 fw-bold mb-3">BENVENUTO IN SALASCOMMESSE 2.0</h1>
+        <p class="lead">La piattaforma di scommesse virtuali più coinvolgente</p>
+    </div>
+
+    @if (Context.Session.GetString("_Username") != null)
+    {
+        <div class="row justify-content-center mb-4">
+            <div class="col-md-10">
+                <div class="card p-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h3 class="fw-bold mb-2">Ciao, <span class="text-warning">@Context.Session.GetString("_Username")</span>!</h3>
+                            <p class="mb-0">Pronto a vivere l'emozione delle scommesse virtuali?</p>
+                        </div>
+                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                            <a asp-controller="Home" asp-action="Deposito" class="btn btn-primary btn-lg">
+                                <i class="bi bi-plus-circle"></i> DEPOSITA
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-container mb-3">
+                            <i class="bi bi-trophy display-4"></i>
+                        </div>
+                        <h3 class="card-title">SCOMMESSE LIVE</h3>
+                        <p class="card-text">Partecipa alle nostre sfide in tempo reale</p>
+                        <a asp-controller="Scommesse" asp-action="Live" class="btn btn-outline-light">Vedi tutte</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-container mb-3">
+                            <i class="bi bi-graph-up-arrow display-4"></i>
+                        </div>
+                        <h3 class="card-title">CLASSIFICHE</h3>
+                        <p class="card-text">Scopri chi sta dominando le competizioni</p>
+                        <a href="#" class="btn btn-outline-light">Vedi classifica</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-container mb-3">
+                            <i class="bi bi-calendar-event display-4"></i>
+                        </div>
+                        <h3 class="card-title">PROSSIMI EVENTI</h3>
+                        <p class="card-text">Non perdere le prossime opportunità</p>
+                        <a href="#" class="btn btn-outline-light">Scopri</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card p-5 text-center">
+                    <h2 class="fw-bold mb-4">INIZIA LA TUA ESPERIENZA</h2>
+                    <p class="lead mb-5">Registrati o accedi per iniziare a scommettere sui nostri eventi virtuali</p>
+                    <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                        <a asp-controller="Home" asp-action="Registrazione" class="btn btn-primary btn-lg px-4 py-2">
+                            <i class="bi bi-person-plus me-2"></i> REGISTRATI
+                        </a>
+                        <a asp-controller="Home" asp-action="Login" class="btn btn-outline-light btn-lg px-4 py-2">
+                            <i class="bi bi-box-arrow-in-right me-2"></i> ACCEDI
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

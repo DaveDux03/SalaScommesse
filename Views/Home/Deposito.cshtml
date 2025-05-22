@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Deposito";
+}
+
+<h1>Deposito</h1>
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
+
+<form asp-action="Deposito">
+    <div class="form-group">
+        <label for="importo" class="control-label">Importo da depositare (€)</label>
+        <input name="importo" type="number" step="0.01" min="0.01" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Deposita" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Torna alla Home</a>
+</div>

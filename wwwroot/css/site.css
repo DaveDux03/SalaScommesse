@@ -1,0 +1,334 @@
+:root {
+    --primary-dark: #1a2e35;
+    --primary-medium: #2a4e57;
+    --primary-light: #3a6e79;
+    --accent-color: #f8b400;
+    --accent-secondary: #ff7b00;
+    --dark-color: #121e22;
+    --light-color: #f5f5f5;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+}
+
+body {
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background-color: var(--primary-dark);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+.nav-link {
+    font-weight: 500;
+}
+
+footer {
+    background-color: var(--primary-dark);
+    color: var(--light-color);
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border: none;
+    color: var(--primary-dark);
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+    .btn-primary:hover {
+        background-color: var(--accent-secondary);
+        transform: translateY(-2px);
+        color: var(--light-color);
+    }
+
+.btn-outline-light {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+    .btn-outline-light:hover {
+        background-color: var(--accent-color);
+        color: var(--primary-dark);
+    }
+
+.card {
+    background-color: var(--primary-medium);
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+.text-warning {
+    color: var(--accent-color) !important;
+}
+
+.text-primary {
+    color: var(--accent-color) !important;
+}
+
+.form-control {
+    background-color: var(--primary-medium);
+    border: 1px solid var(--primary-light);
+    color: var(--light-color);
+}
+
+    .form-control:focus {
+        background-color: var(--primary-medium);
+        color: var(--light-color);
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 0.25rem rgba(248, 180, 0, 0.25);
+    }
+
+/* Stili per login e registrazione */
+.login-container, .registration-container {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    min-height: calc(100vh - 120px);
+    display: flex;
+    align-items: center;
+}
+
+.login-card, .registration-card {
+    background-color: var(--primary-medium);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.login-header, .registration-header {
+    background-color: var(--primary-dark);
+    color: var(--accent-color);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+    .login-header h2, .registration-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+.login-form, .registration-form {
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--light-color);
+}
+
+.form-actions {
+    margin-top: 2rem;
+}
+
+.btn-login, .btn-register {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--accent-color);
+    color: var(--primary-dark);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .btn-login:hover, .btn-register:hover {
+        background-color: var(--accent-secondary);
+        transform: translateY(-2px);
+    }
+
+.login-footer, .registration-footer {
+    padding: 1.5rem;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--light-color);
+}
+
+.login-link, .register-link {
+    color: var(--accent-color);
+    font-weight: 500;
+    margin-left: 0.5rem;
+    text-decoration: none;
+}
+
+    .login-link:hover, .register-link:hover {
+        text-decoration: underline;
+    }
+
+.validation-summary {
+    color: var(--danger-color);
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.validation-message {
+    color: var(--danger-color);
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    display: block;
+}
+
+/* Stili specifici per la registrazione */
+.email-confirm-group {
+    position: relative;
+}
+
+.form-text.text-muted {
+    font-size: 0.8rem;
+    color: #adb5bd !important;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+#email-match-message {
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+    display: block;
+    font-weight: 500;
+}
+/* Dropdown Menu */
+.dropdown-menu {
+    background-color: var(--primary-dark);
+    border: 1px solid var(--accent-color);
+    min-width: 200px;
+}
+
+.dropdown-item {
+    color: var(--light-color);
+    padding: 0.5rem 1rem;
+    transition: all 0.2s;
+}
+
+    .dropdown-item:hover {
+        background-color: var(--primary-medium);
+        color: var(--accent-color);
+    }
+
+.dropdown-item-text {
+    color: white;
+    cursor: default;
+}
+
+.dropdown-divider {
+    border-color: var(--primary-light);
+}
+
+/* Saldo Style */
+.saldo-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logout Button */
+.dropdown-item button {
+    background: none;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+}
+/* Rimuove la freccia del dropdown */
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+/* Animazione per il badge LIVE */
+.badge-pulse {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Animazioni */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade {
+    animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.badge-pulse {
+    animation: pulse 1.5s infinite;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
+
+    .login-container, .registration-container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .login-card, .registration-card {
+        border-radius: 0;
+        box-shadow: none;
+    }
+}

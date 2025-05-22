@@ -1,0 +1,158 @@
+﻿@model IEnumerable<SalaScommesse2_0.Models.Scommessa>
+
+@{
+    ViewData["Title"] = "Scommesse Live";
+}
+
+<div class="container live-container">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">
+            <i class="fas fa-bolt text-warning"></i> SCOMMESSE LIVE
+        </h2>
+        <a asp-action="Index" class="btn btn-outline-primary">
+            <i class="fas fa-arrow-left"></i> Tutte le scommesse
+        </a>
+    </div>
+
+    <div class="row">
+        @if (Model.Any())
+        {
+            @foreach (var scommessa in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card live-card h-100">
+                        <div class="card-header bg-danger text-white d-flex justify-content-between">
+                            <span class="badge bg-warning text-dark">
+                                <i class="fas fa-circle"></i> LIVE
+                            </span>
+                            <span>@scommessa.Categoria</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">@scommessa.Descrizione</h5>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div>
+                                    <span class="text-muted">Quota:</span>
+                                    <span class="h4 text-primary ml-2">@scommessa.Quota.ToString("0.00")</span>
+                                </div>
+                                <div class="text-end">
+                                    <small class="text-muted">Termina tra:</small>
+                                    <div class="countdown" data-end="@scommessa.DataEvento.ToString("o")"></div>
+                                </div>
+                            </div>
+
+                            @if (Context.Session.GetString("_Username") != null)
+                            {
+                                <form asp-action="PiazzaScommessa" method="post">
+                                    <input type="hidden" name="scommessaId" value="@scommessa.Id" />
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text">€</span>
+                                        <input type="number" name="importo" class="form-control"
+                                               min="1" step="0.01" placeholder="Importo" required>
+                                        <button class="btn btn-success" type="submit">
+                                            <i class="fas fa-check"></i> Scommetti
+                                        </button>
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <div class="alert alert-warning text-center">
+                                    <a asp-controller="Home" asp-action="Login">Accedi</a> per piazzare scommesse
+                                </div>
+                            }
+                        </div>
+                        <div class="card-footer bg-light">
+                            <small class="text-muted">
+                                <i class="fas fa-clock"></i> Iniziata: @scommessa.DataEvento.ToString("dd/MM HH:mm")
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert alert-info text-center">
+                    <i class="fas fa-info-circle"></i> Al momento non ci sono scommesse live disponibili
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Countdown timer per le scommesse live
+        function updateCountdowns() {
+            $('.countdown').each(function() {
+                const endTime = new Date($(this).data('end'));
+                const now = new Date();
+                const diff = endTime - now;
+
+                if (diff <= 0) {
+                    $(this).html('<span class="text-danger">Terminata</span>');
+                    return;
+                }
+
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                $(this).html(`${hours}h ${minutes}m ${seconds}s`);
+            });
+        }
+
+        $(document).ready(function() {
+            updateCountdowns();
+            setInterval(updateCountdowns, 1000);
+        });
+    </script>
+}
+
+@section Styles {
+    <style>
+        .live-container {
+            padding-top: 2rem;
+            padding-bottom: 4rem;
+        }
+
+        .live-card {
+            border: 1px solid rgba(255, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(255, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+            .live-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 6px 16px rgba(255, 0, 0, 0.15);
+            }
+
+        .countdown {
+            font-weight: bold;
+            color: var(--danger-color);
+        }
+
+        .card-header.bg-danger {
+            background-color: var(--danger-color) !important;
+        }
+
+        .badge.bg-warning {
+            animation: pulse 1.5s infinite;
+        }
+
+        @@keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+}

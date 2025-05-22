@@ -1,0 +1,110 @@
+﻿@model IEnumerable<SalaScommesse2_0.Models.Scommessa>
+
+@{
+    ViewData["Title"] = "Scommesse Disponibili";
+
+    // Creazione di una lista di scommesse di esempio direttamente nella vista
+    var scommesseDiEsempio = new List<SalaScommesse2_0.Models.Scommessa>
+    {
+        new SalaScommesse2_0.Models.Scommessa
+        {
+            Id = 1,
+            Descrizione = "Juventus vs Milan - Juventus vincente",
+            Quota = 2.10m,
+            DataEvento = DateTime.Now.AddDays(2),
+            Categoria = "Calcio"
+        },
+        new SalaScommesse2_0.Models.Scommessa
+        {
+            Id = 2,
+            Descrizione = "NBA: Lakers vs Warriors - Over 210 punti",
+            Quota = 1.85m,
+            DataEvento = DateTime.Now.AddDays(1),
+            Categoria = "Basket"
+        },
+        new SalaScommesse2_0.Models.Scommessa
+        {
+            Id = 3,
+            Descrizione = "Tennis: Djokovic vs Nadal - Djokovic vincente",
+            Quota = 1.75m,
+            DataEvento = DateTime.Now.AddDays(3),
+            Categoria = "Tennis"
+        },
+        new SalaScommesse2_0.Models.Scommessa
+        {
+            Id = 4,
+            Descrizione = "Formula 1: GP Monaco - Leclerc pole position",
+            Quota = 3.50m,
+            DataEvento = DateTime.Now.AddDays(5),
+            Categoria = "Motori"
+        }
+    };
+
+    // Se il modello è nullo o vuoto, usa le scommesse di esempio
+    var scommesseDaMostrare = Model != null && Model.Any() ? Model : scommesseDiEsempio;
+}
+
+<div class="container">
+    <h2 class="text-center mb-4">Scommesse Disponibili</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+    }
+
+    <div class="row">
+        @foreach (var scommessa in scommesseDaMostrare)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card scommessa-card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="card-title">@scommessa.Descrizione</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Quota:</strong> @scommessa.Quota.ToString("0.00")</p>
+                        <p><strong>Data evento:</strong> @scommessa.DataEvento.ToString("dd/MM/yyyy HH:mm")</p>
+                        <p><strong>Categoria:</strong> @scommessa.Categoria</p>
+
+                        @if (Context.Session.GetString("_Username") != null)
+                        {
+                            <form asp-action="Piazzascommessa" method="post" class="mt-3">
+                                <input type="hidden" name="scommessaId" value="@scommessa.Id" />
+                                <div class="form-group">
+                                    <label for="importo">Importo:</label>
+                                    <input type="number" name="importo" class="form-control" min="1" step="0.01" required />
+                                </div>
+                                <button type="submit" class="btn btn-success btn-block mt-2">
+                                    <i class="fas fa-coins"></i> Piazzascommessa
+                                </button>
+                            </form>
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning mt-3">
+                                <a asp-controller="Home" asp-action="Login">Accedi</a> per piazzare una scommessa
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .scommessa-card {
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+            .scommessa-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+    </style>
+}

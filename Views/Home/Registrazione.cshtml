@@ -1,0 +1,92 @@
+﻿@model SalaScommesse2_0.Models.Utente
+
+@{
+    ViewData["Title"] = "Registrazione";
+}
+
+<div class="registration-container">
+    <div class="registration-card">
+        <div class="registration-header">
+            <h2><i class="fas fa-user-plus"></i> Crea il tuo account</h2>
+        </div>
+
+        <form asp-action="Registrazione" class="registration-form">
+            <div asp-validation-summary="ModelOnly" class="validation-summary"></div>
+
+            <div class="form-group">
+                <label asp-for="Username" class="form-label">
+                    <i class="fas fa-user"></i> Username
+                </label>
+                <input asp-for="Username" class="form-control" placeholder="Inserisci il tuo username" />
+                <span asp-validation-for="Username" class="validation-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="form-label">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Crea una password" />
+                <span asp-validation-for="Password" class="validation-message"></span>
+            </div>
+
+            <div class="form-group password-confirm-group">
+                <label class="form-label">
+                    <i class="fas fa-lock"></i> Conferma Password
+                </label>
+                <input name="PasswordConfirm" type="password" class="form-control" placeholder="Ripeti la password" />
+                <span class="validation-message" id="password-match-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="form-label">
+                    <i class="fas fa-envelope"></i> Email
+                </label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="tua@email.com" />
+                <span asp-validation-for="Email" class="validation-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DataNascita" class="form-label">
+                    <i class="fas fa-calendar-alt"></i> Data di Nascita
+                </label>
+                <input asp-for="DataNascita" type="date" class="form-control" />
+                <span asp-validation-for="DataNascita" class="validation-message"></span>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-register">
+                    <i class="fas fa-user-check"></i> Registrati ora
+                </button>
+            </div>
+        </form>
+
+        <div class="registration-footer">
+            <span>Hai già un account?</span>
+            <a asp-action="Login" class="login-link">
+                <i class="fas fa-sign-in-alt"></i> Accedi
+            </a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function() {
+            $('input[name="PasswordConfirm"]').on('keyup', function() {
+                const password = $('#Password').val();
+                const confirmPassword = $(this).val();
+                const message = $('#password-match-message');
+
+                if (password !== confirmPassword) {
+                    message.text('Le password non corrispondono').css('color', 'var(--danger-color)');
+                } else {
+                    message.text('Le password corrispondono').css('color', 'var(--success-color)');
+                }
+            });
+        });
+    </script>
+}
